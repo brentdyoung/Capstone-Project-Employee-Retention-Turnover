@@ -1,0 +1,27 @@
+TEAM 61: Employee Retention
+
+Team Members:
+•	Agnes Cheng
+•	Brent Young
+•	Mary Taylor
+•	Michelle Eure
+
+Project Description: The People Insights’ team goals are to explore 
+employee demographics and employee survey scores in order to 
+predict the probability that an employee will leave the company, 
+determine which factors prompt employees to leave, 
+and create a Stay Survey so that leaders/HR can use the model 
+results to retain high risk employees.
+
+Disclaimer: Please note that the data is from Kaggle and is fictional. 
+This project was completed as part of the MSDS 498 Capstone Project 
+course within the Northwestern University - Data Science Program. 
+All data, dashboards, and insights used throughout this project 
+are completely simulated and not in any way connected to or 
+a reflection of The Walt Disney Company.Please do not duplicate or distribute 
+outside of the context of this course.
+
+YouTube Link: https://www.youtube.com/watch?v=Ygab9v_Le9s&feature=youtu.be
+
+Tableau Dashboard Link: https://public.tableau.com/views/Team_61_Dashboard/CHRODASHBOARDS
+
