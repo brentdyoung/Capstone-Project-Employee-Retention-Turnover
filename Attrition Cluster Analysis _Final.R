@@ -2,7 +2,7 @@
 #MSDS 498 Capstone Spring 2019
 
 #Load Data
-setwd("~/R/MSDS 498")
+setwd("~/Brent's Documents/R Datasets/Cluster")
 
 mydata <- read.csv("WA_Fn-UseC_-HR-Employee-Attrition.csv")
 
@@ -89,6 +89,17 @@ mydata$OverTime <- as.numeric(mydata$OverTime)
 
 str(mydata)
 
+###### Normalizing - Z score EXAMPLE ######
+#mu=colMeans(mydata[,2:6])
+#mu
+#mu=matrix(mu,nrow=23,ncol=5,byrow=TRUE)
+#sigma=apply(mydata[,2:6],2,"sd")
+#sigma=matrix(sigma,nrow=23,ncol=5,byrow=TRUE)
+#sigma
+#mydata[,2:6]=(mydata[,2:6]-mu)/sigma
+#mydata
+#colMeans(mydata[,2:6])
+
 ###################################### Create subsets #####################################
 
 #Subset of survey questions
@@ -119,8 +130,8 @@ numsubcorrelation <- cor(numsub)
 
 ##Correlation Plot 3 w/ Numbers
 corrplot(numsubcorrelation, method="shade", addCoef.col="black", 
-addCoefasPercent=TRUE ,type="lower", shade.col=NA, tl.col="black", 
-tl.srt=45,number.cex = 0.6,tl.cex = 0.6, addcolorlabel="no", order="AOE",insig = "p-value")
+         addCoefasPercent=TRUE ,type="lower", shade.col=NA, tl.col="black", 
+         tl.srt=45,number.cex = 0.6,tl.cex = 0.6, addcolorlabel="no", order="AOE",insig = "p-value")
 
 ### PCA Plots ###
 
@@ -163,7 +174,7 @@ fviz_nbclust(numsub, kmeans, method = "silhouette")+
 # Use verbose = FALSE to hide computing progression.
 #set.seed(123)
 #fviz_nbclust(numsub, kmeans, nstart = 25,  method = "gap_stat", nboot = 50)+
- # labs(subtitle = "Gap statistic method")
+# labs(subtitle = "Gap statistic method")
 
 #NbClust: Determining the Best Number of Clusters in a Data Set
 #It provides 30 indexes for determining the optimal number of clusters in a data set and offers the best clustering scheme from different results to the user.
@@ -242,7 +253,7 @@ newdf <- read.csv("clusterresults_3.csv") #File that contains cluster results as
 str(newdf)
 describe(newdf)
 
-##File that contains cluster results assigned to each responden with demographics and survey
+##File that contains cluster results assigned to each respondent with demographics and survey
 combdata1 <- cbind(numsub ,newdf,mydata)
 str(combdata1)
 describe(combdata1)
@@ -291,6 +302,20 @@ require(reshape)
 combdata <- rename(combdata, c(clusterresults.cluster="cluster")) #rename clusterresults.cluster to cluster
 aggregate(combdata,by=list(byvar=combdata$cluster), mean) #For each cluster, show mean response for the subset of q's
 
+#Graphs - EXAMPLE
+#colnames(data)=c("ID","Utilization","Rev_Growth","Charge_Rate","ID2","Cluster","Region")
+#write.csv(data, file = "Galaxy_combined_data_5_renamed.csv") #cluster results assigned to each respondent
+
+#data$Cluster=as.factor(data$Cluster)
+
+#library(ggplot2)
+#ggplot(data=data,aes(x=Utilization,y=Rev_Growth,color=Cluster))+geom_point()
+#ggplot(data=data,aes(x=Charge_Rate,y=Rev_Growth,color=Cluster))+geom_point()
+#ggplot(data=data,aes(x=Utilization,y=Charge_Rate,color=Cluster))+geom_point()
+
+#library(rgl)
+#with(data,plot3d(Utilization,Rev_Growth,Charge_Rate,col=Cluster,type="s"))
+
 ############################################### Segment 1 #######################################################
 
 #Subsetting on Segment 1 (numdata)
@@ -320,4 +345,3 @@ combdata_segment3<-combdata_seg[combdata_seg$cluster ==3, ]
 str(combdata_segment3)
 
 describe(combdata_segment3)
-
